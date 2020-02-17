@@ -6,7 +6,7 @@
          
          <servlet>
          
-         <servlet-name>blogproject</servlet-name>
+         <servlet-name>blog</servlet-name>
          
          <servlet-class>blogproject.BlogServlet</servlet-class>
          
