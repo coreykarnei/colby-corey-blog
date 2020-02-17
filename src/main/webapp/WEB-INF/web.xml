@@ -6,17 +6,31 @@
          
          <servlet>
          
-         <servlet-name>blog</servlet-name>
+	         <servlet-name>blog</servlet-name>
          
-         <servlet-class>blogproject.BlogServlet</servlet-class>
+	         <servlet-class>blogproject.BlogServlet</servlet-class>
          
          </servlet>
          
          <servlet-mapping>
          
-         <servlet-name>blog</servlet-name>
+	         <servlet-name>blog</servlet-name>
          
-         <url-pattern>/blog</url-pattern>
+	         <url-pattern>/blog</url-pattern>
+         
+         </servlet-mapping>
+         
+         <!--> Colby is driving now-->
+         <servlet>
+         
+         	<servlet-name>sign</servlet-name>
+         	<servlet-class>blogproject.SignBlogServlet</servlet-class>
+         
+         </servlet>
+         <servlet-mapping>
+         
+         	<servlet-name>sign</servlet-name>
+         	<url-pattern>/sign</url-pattern>
          
          </servlet-mapping>
   
