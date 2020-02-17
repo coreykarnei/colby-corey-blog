@@ -29,7 +29,7 @@
 	 	String blogName = request.getParameter("blogName");
 	 	if(blogName == null)
 	 	{
-	 		blogName = "CC Blog";
+	 		blogName = "main";
 	 	}
 	 	
 	 	pageContext.setAttribute("blogName", blogName);
@@ -57,7 +57,6 @@
 	%>
 	<div class="center">
 	 <form action="/sign" method="post">
-	 
 	 <div class="cent"><textarea type="text" name="title" rows="1" cols="20"></textarea></div>
 	   <div class="cent"><textarea width="100%" name="content" rows="3" cols="60"></textarea></div>
 	   <div class="cent"><input type="submit" value="Post Greeting" ></div>

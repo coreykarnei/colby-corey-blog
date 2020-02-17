@@ -29,7 +29,7 @@
 	 	String blogName = request.getParameter("blogName");
 	 	if(blogName == null)
 	 	{
-	 		blogName = "CC Blog";
+	 		blogName = "main";
 	 	}
 	 	
 	 	pageContext.setAttribute("blogName", blogName);
@@ -72,44 +72,45 @@
 	    if (posts.isEmpty()) {
 	
 	        %>
-	        <p>Blog '${fn:escapeXml(blogName)}' has no posts.</p>
+	        <p>Blog has no posts.</p>
 	        <%
 	
 	    } else {
-	
-	        %>
-	        <p>Blog Name: '${fn:escapeXml(blogName)}'.</p>
-	        <%
 	
 	        for (Entity post : posts) {
 	
 	            pageContext.setAttribute("post_content",
 	
 	                                     post.getProperty("content"));
+
+	            pageContext.setAttribute("post_title",
 	
-	            if (post.getProperty("user") == null) {
+	                                     post.getProperty("title"));
+	            
+	            pageContext.setAttribute("post_date",
+	            		
+                        post.getProperty("date"));
+
 	
-	                %>
-	                <p>An anonymous person wrote:</p>
-	                <%
+
 	
-	            } else {
-	
-	                pageContext.setAttribute("post_user", post.getProperty("user"));
-	
-	                %>
-	                <p><b>${fn:escapeXml(post_user.nickname)}</b> wrote:</p>
-	                <%
-	
-	            }
-	
-	            %>
+                pageContext.setAttribute("post_user", post.getProperty("user"));
+
+                %>
+                <hr>
+                <p><b> ${fn:escapeXml(post_title)} </b> by: ${fn:escapeXml(post_user.nickname)} on ${fn:escapeXml(post_date)}</p>
+  
 	            <blockquote>${fn:escapeXml(post_content)}</blockquote>
 	            <%
 	
 	        }
 	
 	    }
+	    
+	    %>
+	    <hr>
+	    <br>
+	    <% 
 	    
 	    // corey is now driving
 	    
@@ -124,7 +125,7 @@
 			
 			<br>
 			
-			<div><input type="submit" value="Create Post" ></div>
+			<div><a href="/newpost.jsp">Create New Post</a></div>
 			<%
 		
 			    } else {
@@ -140,11 +141,6 @@
 			    }
 	    
 	%>
-	 <form action="/sign" method="post">
-	   <div><textarea name="content" rows="3" cols="60"></textarea></div>
-	   <div><input type="submit" value="Post Greeting" ></div>
-	   <input type="hidden" name="blogName" value="${fn:escapeXml(blogName)}"/>
-	 </form>
  	
  	</body>
  
