@@ -59,8 +59,9 @@
 	 <form action="/sign" method="post">
 	 <div class="cent"><textarea type="text" name="title" rows="1" cols="20"></textarea></div>
 	   <div class="cent"><textarea width="100%" name="content" rows="3" cols="60"></textarea></div>
-	   <div class="cent"><input type="submit" value="Post Greeting" ></div>
-	   <input  type="hidden" name="blogName" value="${fn:escapeXml(blogName)}"/>
+	   <div class="cent"><input class="button" type="submit" value="Post Greeting" ></div>
+	   <input type="hidden" name="blogName" value="${fn:escapeXml(blogName)}"/>	    
+	   <a href="/" class="button">Cancel</a>
 	 </form>
  	</div>
  	</body>

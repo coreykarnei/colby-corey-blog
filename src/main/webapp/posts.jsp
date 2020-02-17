@@ -67,7 +67,7 @@
 	
 	    Query query = new Query("Post", blogKey)
 	    	.addSort("date", Query.SortDirection.DESCENDING);
-	    List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+	    List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10000));
 	
 	    if (posts.isEmpty()) {
 	
@@ -92,8 +92,6 @@
                         post.getProperty("date"));
 
 	
-
-	
                 pageContext.setAttribute("post_user", post.getProperty("user"));
 
                 //colby is driving
@@ -112,41 +110,11 @@
 	    %>
 	    <hr>
 	    
-	    <a class="button" href="posts.jsp">See all posts</a>
-	    <br>
-	    <br>
-	    <%
+	    <a href="/" class="button">Back to Blog Home</a>
 	    
-	    // corey is driving
-
-	    if (user != null) {
-
-		    pageContext.setAttribute("user", user);
-
-		    
-			%>
-			<p>Hello, ${fn:escapeXml(user.nickname)}! You can submit a post using the link below, or
-		
-			<a class="button" href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>!</p>
-			
-			<br>
-			
-			<div><a class="button" href="/newpost.jsp">Create New Post</a></div>
-			<%
-		
-			    } else {
-		
-			%>
-			<p>Hello! Please
-		
-			<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-		
-			to be able to post!</p>
-			<%
-		
-			    }
 	    
-	%>
+	    
+	    <br>
  	
  	</body>
  
