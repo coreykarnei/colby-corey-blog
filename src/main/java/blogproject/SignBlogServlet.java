@@ -16,9 +16,6 @@ import java.util.Date;
  
 
 public class SignBlogServlet extends HttpServlet {
-
-    private static final Logger log = Logger.getLogger(SignBlogServlet.class.getName());
-
  
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -29,27 +26,24 @@ public class SignBlogServlet extends HttpServlet {
 
         User user = userService.getCurrentUser();
 
- 
-
+        // Colby is driving now:
+        
+        // Setting up datastore for blog:
+        String blogName = req.getParameter("blogName");
+        Key blogKey = KeyFactory.createKey("Blog", blogName);
+        String title = req.getParameter("title");
         String content = req.getParameter("content");
+        Date date = new Date();
+        Entity post = new Entity("Post", blogKey);
+        post.setProperty("user", user);
+        post.setProperty("date", date);
+        post.setProperty("content", content);
+        post.setProperty("title", title);
+        
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(post);
 
-        if (content == null) {
-
-            content = "(No greeting)";
-
-        }
-
-        if (user != null) {
-
-            log.info("Greeting posted by user " + user.getNickname() + ": " + content);
-
-        } else {
-
-            log.info("Greeting posted anonymously: " + content);
-
-        }
-
-        resp.sendRedirect("/blog.jsp");
+        resp.sendRedirect("/blog.jsp?blogName=" + blogName);
 
     }
 
