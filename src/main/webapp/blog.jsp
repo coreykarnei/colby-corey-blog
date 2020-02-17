@@ -16,6 +16,9 @@
  
  <html>
  
+	<head>
+		<link type="text/css" rel="stylesheet" href = "/stylesheets/main.css" />
+	</head>
  	<body>
  	
  	
@@ -71,7 +74,8 @@
 	    // Run an ancestor query to ensure we see the most up-to-date
 	    // 	view of the blog posts belonging to the selected blog.
 	
-	    Query query = new Query("Post", blogKey).addSort("date", Query.SortDirection.DESCENDING);
+	    Query query = new Query("Post", blogKey)
+	    	.addSort("date", Query.SortDirection.DESCENDING);
 	    List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
 	
 	    if (posts.isEmpty()) {
@@ -86,7 +90,7 @@
 	
 	        %>
 	
-	        <p>Blog Posts: '${fn:escapeXml(blogName)}'.</p>
+	        <p>Blog Name: '${fn:escapeXml(blogName)}'.</p>
 	
 	        <%
 	
