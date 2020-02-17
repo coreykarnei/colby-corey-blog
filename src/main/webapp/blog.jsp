@@ -29,43 +29,34 @@
 	 	String blogName = request.getParameter("blogName");
 	 	if(blogName == null)
 	 	{
-	 		blogName = "default";
+	 		blogName = "CC Blog";
 	 	}
 	 	
 	 	pageContext.setAttribute("blogName", blogName);
 	 	
 	 	UserService userService = UserServiceFactory.getUserService();
 	    User user = userService.getCurrentUser();
-
-	    if (user != null) {
-
-	      pageContext.setAttribute("user", user);
-
-		%>
-	
-		<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
-	
-		<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-	
-		<%
-	
-		    } else {
-	
-		%>
-	
-		<p>Hello!
-	
-		<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-	
-		to include your name with greetings you post.</p>
-	
-		<%
-	
-		    }
-	
-		%>
 		
-		<%
+	    %>
+	    
+	    <table style="width:100%" id="header">
+	    
+	    <tr>
+	    	<th style="width:70%" >
+	   			<p color="red">CC Blog</p>
+	   			<p>Welcome to our blog! Here you can post blogs and blog related things!</p>
+	    	</th>
+	    	<th>
+	    		<img src="blog.jpg" alt="Blog Pic" width="100%" height="50%">
+	    	</th>
+	    </tr>
+	    
+	    </table>
+	    <%
+	    
+	    
+	
+
 
 	    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	
@@ -81,17 +72,13 @@
 	    if (posts.isEmpty()) {
 	
 	        %>
-	
 	        <p>Blog '${fn:escapeXml(blogName)}' has no posts.</p>
-	
 	        <%
 	
 	    } else {
 	
 	        %>
-	
 	        <p>Blog Name: '${fn:escapeXml(blogName)}'.</p>
-	
 	        <%
 	
 	        for (Entity post : posts) {
@@ -103,9 +90,7 @@
 	            if (post.getProperty("user") == null) {
 	
 	                %>
-	
 	                <p>An anonymous person wrote:</p>
-	
 	                <%
 	
 	            } else {
@@ -113,26 +98,48 @@
 	                pageContext.setAttribute("post_user", post.getProperty("user"));
 	
 	                %>
-	
 	                <p><b>${fn:escapeXml(post_user.nickname)}</b> wrote:</p>
-	
 	                <%
 	
 	            }
 	
 	            %>
-	
 	            <blockquote>${fn:escapeXml(post_content)}</blockquote>
-	
 	            <%
 	
 	        }
 	
 	    }
-	
+	    
+	    // corey is now driving
+	    
+	    if (user != null) {
+
+		      pageContext.setAttribute("user", user);
+
+			%>
+			<p>Hello, ${fn:escapeXml(user.nickname)}! You can submit a post using the link below, or
+		
+			<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>!</p>
+			
+			<br>
+			
+			<div><input type="submit" value="Create Post" ></div>
+			<%
+		
+			    } else {
+		
+			%>
+			<p>Hello! Please
+		
+			<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
+		
+			to be able to post!</p>
+			<%
+		
+			    }
+	    
 	%>
-		
-		
 	 <form action="/sign" method="post">
 	   <div><textarea name="content" rows="3" cols="60"></textarea></div>
 	   <div><input type="submit" value="Post Greeting" ></div>
