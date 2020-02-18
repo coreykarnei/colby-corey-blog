@@ -240,6 +240,8 @@
 			<br>
 			
 			<div><a class="button" href="/newpost.jsp">Create New Post</a></div>
+			<br>
+			<div><a class="button" href="/cron/cronjob">Subscribe</a></div>
 			<%
 		
 			    } else {

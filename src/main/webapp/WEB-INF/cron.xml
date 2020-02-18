@@ -3,6 +3,6 @@
   <cron> 
     <url>/cron/cronjob</url>
     <description>Test Cron Job!</description>
-    <schedule>every 1 minutes</schedule>
+    <schedule>every 24 hours</schedule>
   </cron>
 </cronentries>
