@@ -127,8 +127,7 @@
 	    		
 	    	}
 	</script>
-	<button onclick="changeColor();">Change color</button>
-	<button onclick="resetColor();">Reset color</button>
+
 	 	<%
 	
 	 	String blogName = request.getParameter("blogName");
@@ -169,6 +168,8 @@
 	   <a href="/" class="button">Cancel</a>
 	 </form>
  	</div>
+ 	<button onclick="changeColor();">Change color</button>
+	<button onclick="resetColor();">Reset color</button>
  	</body>
  
  </html>
