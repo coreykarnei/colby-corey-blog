@@ -1,6 +1,8 @@
 body {
 	font-family: Verdana, Helvetica, sans-serif;
 	background-color: #add8e6;
+	padding: 10px;
+	margin: 10px;
 }
 table, th, td{
 	padding: 10px;

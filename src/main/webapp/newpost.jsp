@@ -129,11 +129,6 @@
 	</script>
 	<button onclick="changeColor();">Change color</button>
 	<button onclick="resetColor();">Reset color</button>
-	    
-
-
-
-
 	 	<%
 	
 	 	String blogName = request.getParameter("blogName");
