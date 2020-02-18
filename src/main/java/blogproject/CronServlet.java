@@ -69,25 +69,22 @@ public class CronServlet extends HttpServlet {
 			Query query1 = new Query("Post", blogKey)
 			    	.addSort("date", Query.SortDirection.DESCENDING);
 			
-			
-			for (Entity email : Emails) {
-				try {
-				      Message msg = new MimeMessage(session);
-				      msg.setFrom(new InternetAddress("bot@colby-corey-blog.appspotmail.com", "colby-corey-blog bot"));
-				      msg.addRecipient(Message.RecipientType.TO,
-				                       new InternetAddress((String) user.getEmail(), "Blog User"));
-				      msg.setSubject("24 Hour Update");
-				      msg.setText("Thank you for subscribing to updates!");
-				      _logger.info("Emailed: " + (String) email.getProperty("email"));
-				      Transport.send(msg);
-			    } catch (AddressException e) {
-				      _logger.info("Email address invalid.");
-			    } catch (MessagingException e) {
-			    	_logger.info("Caught messaging exception.");
-			    } catch (UnsupportedEncodingException e) {
-			    	_logger.info("Caught unsupported encoding exception.");
-			    }
-			}
+
+			try {
+			      Message msg = new MimeMessage(session);
+			      msg.setFrom(new InternetAddress("bot@colby-corey-blog.appspotmail.com", "colby-corey-blog bot"));
+			      msg.addRecipient(Message.RecipientType.TO,
+			                       new InternetAddress((String) user.getEmail(), "Blog User"));
+			      msg.setSubject("24 Hour Update");
+			      msg.setText("Thank you for subscribing to updates!");
+			      Transport.send(msg);
+		    } catch (AddressException e) {
+			      _logger.info("Email address invalid.");
+		    } catch (MessagingException e) {
+		    	_logger.info("Caught messaging exception.");
+		    } catch (UnsupportedEncodingException e) {
+		    	_logger.info("Caught unsupported encoding exception.");
+		    }
 			
 
 			
