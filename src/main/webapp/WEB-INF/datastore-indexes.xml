@@ -6,5 +6,9 @@
     <datastore-index kind="Post" ancestor="true" source="auto">
         <property name="date" direction="desc"/>
     </datastore-index>
+    
+    <datastore-index kind="Email" ancestor="true" source="auto">
+    	<property name="email" direction="desc"/>
+    </datastore-index>
 
 </datastore-indexes>

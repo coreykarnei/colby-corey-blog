@@ -6,42 +6,56 @@
          
          
          <servlet>
-         
 	         <servlet-name>blog</servlet-name>
-         
 	         <servlet-class>blogproject.BlogServlet</servlet-class>
-         
          </servlet>
-         
          <servlet-mapping>
-         
 	         <servlet-name>blog</servlet-name>
-         
 	         <url-pattern>/blog</url-pattern>
+         </servlet-mapping>
          
+         <!--> subscriptionData servlet used to store and retrieve subscriptions-->         
+         <servlet>
+	         <servlet-name>subscriptionData</servlet-name>
+	         <servlet-class>blogproject.SubscriptionDataServlet</servlet-class>
+         </servlet>
+         <servlet-mapping>
+	         <servlet-name>subscriptionData</servlet-name>
+	         <url-pattern>/subscriptionData</url-pattern>
+         </servlet-mapping>
+                  
+         <!--> subscribe servlet jsp displays info about current subscription status-->                   
+         <servlet>
+	         <servlet-name>subscribe</servlet-name>
+	         <jsp-file>/subscribe.jsp</jsp-file>
+         </servlet>
+         <servlet-mapping>
+	         <servlet-name>subscribe</servlet-name>
+	         <url-pattern>/subscribe</url-pattern>
          </servlet-mapping>
          
          
          
          <!--> Colby is driving now-->
-         <servlet>
          
+         
+         <!--> sign servlet used to sign blog posts-->
+         <servlet>
          	<servlet-name>sign</servlet-name>
          	<servlet-class>blogproject.SignBlogServlet</servlet-class>
-         
          </servlet>
          <servlet-mapping>
-         
          	<servlet-name>sign</servlet-name>
          	<url-pattern>/sign</url-pattern>
-         
          </servlet-mapping>
+         
+         
+
          
          <servlet>
          	<servlet-name>CronServlet</servlet-name>
          	<servlet-class>blogproject.CronServlet</servlet-class>         	
          </servlet>
-         
          <servlet-mapping>
          	<servlet-name>CronServlet</servlet-name>
          	<url-pattern>/cron/cronjob</url-pattern>
