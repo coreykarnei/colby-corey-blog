@@ -1,0 +1,4 @@
+cron:
+- description: "Cron Job that simply announces that it got invoked."
+  url: /cronjob
+  schedule: every 2 minutes

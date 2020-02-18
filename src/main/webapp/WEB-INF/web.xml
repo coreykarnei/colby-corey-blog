@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
          
+         
          <servlet>
          
 	         <servlet-name>blog</servlet-name>
@@ -20,6 +21,8 @@
          
          </servlet-mapping>
          
+         
+         
          <!--> Colby is driving now-->
          <servlet>
          
@@ -34,6 +37,9 @@
          
          </servlet-mapping>
   
+  <!--> Corey is driving now-->
+
+         
   <welcome-file-list>
     <welcome-file>blog.jsp</welcome-file>
   </welcome-file-list>
