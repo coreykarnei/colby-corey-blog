@@ -2,7 +2,7 @@
 <cronentries>
   <cron> 
     <url>/cron/cronjob</url>
-    <description>Test Cron Job!</description>
-    <schedule>every day 3:57</schedule>
+    <description>Daily Digest Email</description>
+    <schedule>every day 23:00</schedule>
   </cron>
 </cronentries>

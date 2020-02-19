@@ -10,6 +10,13 @@
 <%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
+<%@ page import="java.time.*" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
@@ -196,9 +203,20 @@
 	
 	                                     post.getProperty("title"));
 	            
+	            
+	            
+	            Date postDate = (Date) post.getProperty("date");
+	            
+	            LocalDateTime ldt = postDate.toInstant()
+	            	      .atZone(ZoneId.of("America/Chicago"))
+	            	      .toLocalDateTime();
+	            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("h:mm a EEE, MMM d");
+	            DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
+	            String formattedDate = myFormatObj.format(ldt);
+	            
 	            pageContext.setAttribute("post_date",
 	            		
-                        post.getProperty("date"));
+                        formattedDate);
 
 	
                 pageContext.setAttribute("post_user", post.getProperty("user"));

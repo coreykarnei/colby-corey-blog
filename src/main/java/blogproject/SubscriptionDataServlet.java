@@ -45,17 +45,6 @@ public class SubscriptionDataServlet extends HttpServlet{
 		    
 		}	
 	    
-    	
-	    Query query = new Query("SubscribedUser");
-	    PreparedQuery results = datastore.prepare(query);
-	    
-	    for(Entity subscribedUserEntity : results.asIterable()) {
-	    	
-	    	String email = (String) subscribedUserEntity.getProperty("email");
-	    	Boolean isSubscribed = (Boolean) subscribedUserEntity.getProperty("subscribed");
-	    	
-	    	response.getOutputStream().println("<li>" + email + " - " + isSubscribed + "</li>");
-	    }
 	    
 	    response.getOutputStream().println("</ul>");
 	    response.getOutputStream().println("<p><a href=\"/subscribe\">Back</a></p>");
@@ -83,21 +72,20 @@ public class SubscriptionDataServlet extends HttpServlet{
 			existingUserEntity.setProperty("subscribed", Status);
 			datastore.put(existingUserEntity);
 			
-			
 		} catch(EntityNotFoundException e) {
 			
 			System.out.println("User " + user.getEmail() + " is not in datastore. creating new entity.");
 			
 			Entity newUserEntity = new Entity("SubscribedUser", email);
 			newUserEntity.setProperty("email", email);
-			
-			if(Status) {
-					SendMail.send(email, "welcome");
-			}
 
 			newUserEntity.setProperty("subscribed", Status);
 			datastore.put(newUserEntity);
 			
+		}
+
+		if(Status) {
+				SendMail.send(email, "welcome");
 		}
 		
 		System.out.println("User" + user.getEmail() + " wants to subscribe: " + Status);

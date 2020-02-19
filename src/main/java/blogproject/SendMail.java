@@ -136,20 +136,20 @@ public class SendMail{
 		
 		LocalDate today = LocalDate.now(ZoneId.of("America/Chicago"));
 		LocalDate yesterday = today.minus(Period.ofDays(1));
-		LocalTime five = LocalTime.of(5,00,00);
+		LocalTime five = LocalTime.of(17,00,00);
 		LocalDateTime yesterdayAtFive = LocalDateTime.of(yesterday, five);
 		
 		LocalTime testTime = LocalTime.of(21,00,00);
 		LocalDateTime testDateTime = LocalDateTime.of(today, testTime);
 
-		Date date = Date.from(testDateTime.atZone(ZoneId.of("America/Chicago")).toInstant());
+		Date date = Date.from(yesterdayAtFive.atZone(ZoneId.of("America/Chicago")).toInstant());
 		
 		Filter dayFilter = new FilterPredicate("date", FilterOperator.GREATER_THAN_OR_EQUAL, date);
 		
 		Query query = new Query("Post", blogKey).setFilter(dayFilter);
 		List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10000));
 		
-		String messageContents = "<h1> 24 Hour Blog Updates </h1><p>Posts since " + ZonedDateTime.of(testDateTime, ZoneId.of("America/Chicago")) + "</p>";
+		String messageContents = "<h1> 24 Hour Blog Updates </h1><p>Posts since " + ZonedDateTime.of(yesterdayAtFive, ZoneId.of("America/Chicago")) + "</p>";
 		
 		if (posts.isEmpty()) {
 			
