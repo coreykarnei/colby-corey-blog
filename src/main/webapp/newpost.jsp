@@ -156,20 +156,27 @@
 	    </tr>
 	    
 	    </table>
+	    
+	    
+ 	<button onclick="changeColor();">Change color</button>
+	<button onclick="resetColor();">Reset color</button>
+	<br><br>
 	    <%
 	    
 	%>
 	<div class="center">
 	 <form action="/sign" method="post">
-	 <div class="cent"><textarea type="text" name="title" rows="1" cols="20"></textarea></div>
-	   <div class="cent"><textarea width="100%" name="content" rows="3" cols="60"></textarea></div>
-	   <div class="cent"><input class="button" type="submit" value="Post Greeting" ></div>
-	   <input type="hidden" name="blogName" value="${fn:escapeXml(blogName)}"/>	    
-	   <a href="/" class="button">Cancel</a>
+	 	<p>Title:</p>
+	 	<div class="cent"><textarea type="text" name="title" rows="1" cols="30"></textarea></div>
+	 	<p>Post Content:</p>
+	 	<div class="cent"><textarea width="100%" name="content" rows="5" cols="60"></textarea></div>
+	 	<br>
+	 	<div class="cent"><input class="button" type="submit" value="Publish Blog Post" ></div>
+	 	<br><br>
+	 	<input type="hidden" name="blogName" value="${fn:escapeXml(blogName)}"/>	    
+	 	<a href="/" class="button">Cancel</a>
 	 </form>
  	</div>
- 	<button onclick="changeColor();">Change color</button>
-	<button onclick="resetColor();">Reset color</button>
  	</body>
  
  </html>
