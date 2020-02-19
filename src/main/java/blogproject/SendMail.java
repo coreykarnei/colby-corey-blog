@@ -25,6 +25,7 @@ import java.time.LocalTime;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.activation.DataHandler;
 import javax.mail.Multipart;
@@ -138,9 +139,7 @@ public class SendMail{
 		LocalDate yesterday = today.minus(Period.ofDays(1));
 		LocalTime five = LocalTime.of(17,00,00);
 		LocalDateTime yesterdayAtFive = LocalDateTime.of(yesterday, five);
-		
-		LocalTime testTime = LocalTime.of(21,00,00);
-		LocalDateTime testDateTime = LocalDateTime.of(today, testTime);
+
 
 		Date date = Date.from(yesterdayAtFive.atZone(ZoneId.of("America/Chicago")).toInstant());
 		
@@ -148,8 +147,15 @@ public class SendMail{
 		
 		Query query = new Query("Post", blogKey).setFilter(dayFilter);
 		List<Entity> posts = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10000));
+		        
+        LocalDateTime ldt = date.toInstant()
+        	      .atZone(ZoneId.of("America/Chicago"))
+        	      .toLocalDateTime();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("h:mm a EEE, MMM d");
+        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
+        String formattedDate = myFormatObj.format(ldt);
 		
-		String messageContents = "<h1> 24 Hour Blog Updates </h1><p>Posts since " + ZonedDateTime.of(yesterdayAtFive, ZoneId.of("America/Chicago")) + "</p>";
+		String messageContents = "<h1> 24 Hour Blog Updates </h1><p>Posts since " + formattedDate + "</p>";
 		
 		if (posts.isEmpty()) {
 			
@@ -170,7 +176,15 @@ public class SendMail{
 	            
 	            postData += " on ";
 	            
-	            postData += post.getProperty("date");
+	            Date postDate = (Date) post.getProperty("date");
+	            
+	            LocalDateTime postLDT = postDate.toInstant()
+	            	      .atZone(ZoneId.of("America/Chicago"))
+	            	      .toLocalDateTime();
+	            DateTimeFormatter postFormat = DateTimeFormatter.ofPattern("h:mm a EEE, MMM d");
+	            String finalDate = postFormat.format(postLDT);
+	            
+	            postData += finalDate;
 	            
 	            postData += "</p>";
 	            

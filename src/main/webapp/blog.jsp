@@ -199,9 +199,7 @@
 
 	            pageContext.setAttribute("post_title",
 	
-	                                     post.getProperty("title"));
-	            
-	            
+	                                     post.getProperty("title"));            
 	            
 	            Date postDate = (Date) post.getProperty("date");
 	            
@@ -209,7 +207,6 @@
 	            	      .atZone(ZoneId.of("America/Chicago"))
 	            	      .toLocalDateTime();
 	            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("h:mm a EEE, MMM d");
-	            DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
 	            String formattedDate = myFormatObj.format(ldt);
 	            
 	            pageContext.setAttribute("post_date",
