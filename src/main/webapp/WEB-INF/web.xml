@@ -34,6 +34,16 @@
 	         <url-pattern>/subscribe</url-pattern>
          </servlet-mapping>
          
+         <!--> sendMail servlet is used for sending emails to users-->                   
+         <servlet>
+	         <servlet-name>sendMail</servlet-name>
+	         <jsp-file>blogproject.SendMailServlet</jsp-file>
+         </servlet>
+         <servlet-mapping>
+	         <servlet-name>sendMail</servlet-name>
+	         <url-pattern>/sendMail</url-pattern>
+         </servlet-mapping>
+         
          
          
          <!--> Colby is driving now-->

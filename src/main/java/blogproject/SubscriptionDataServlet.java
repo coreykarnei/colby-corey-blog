@@ -31,6 +31,21 @@ public class SubscriptionDataServlet extends HttpServlet{
 	    
 	    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	    
+		Key subscribedUserKey = KeyFactory.createKey("SubscribedUser", user.getEmail());
+	    Entity existingUserEntity;
+		try {
+			existingUserEntity = datastore.get(subscribedUserKey);
+
+		    Boolean existingUserIsSubscribed = (Boolean) existingUserEntity.getProperty("subscribed");
+		    response.getOutputStream().println("<p> Your email: " + user.getEmail() + " is currently subscribed: " + existingUserIsSubscribed + "</li>");
+		    
+			
+		} catch (EntityNotFoundException e) {
+			response.getOutputStream().println("<p> No UserEntity exists for " + user.getEmail() + " </li>");
+		    
+		}	
+	    
+    	
 	    Query query = new Query("SubscribedUser");
 	    PreparedQuery results = datastore.prepare(query);
 	    
