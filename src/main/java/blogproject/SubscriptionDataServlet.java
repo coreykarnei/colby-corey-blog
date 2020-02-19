@@ -90,6 +90,10 @@ public class SubscriptionDataServlet extends HttpServlet{
 			
 			Entity newUserEntity = new Entity("SubscribedUser", email);
 			newUserEntity.setProperty("email", email);
+			
+			if(Status) {
+					SendMail.send(email, "welcome");
+			}
 
 			newUserEntity.setProperty("subscribed", Status);
 			datastore.put(newUserEntity);

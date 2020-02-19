@@ -24,6 +24,9 @@ import javax.mail.internet.MimeMultipart;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -31,6 +34,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.PreparedQuery;
 
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -51,11 +55,26 @@ public class CronServlet extends HttpServlet {
 
 			//TODO: Retrieve list of emails or entities that are currently subscribed.
 
-			SendMail.send("colbywho@gmail.com", "welcome");
+			
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			
+			Filter subscribedFilter = new FilterPredicate("subscribed", FilterOperator.EQUAL, true);
+			
+			Query query = new Query("SubscribedUser").setFilter(subscribedFilter);
+		    PreparedQuery results = datastore.prepare(query);
+		    
+		    for(Entity subscribedUserEntity : results.asIterable()) {
+		    	
+		    	String email = (String) subscribedUserEntity.getProperty("email");
+		    	Boolean isSubscribed = (Boolean) subscribedUserEntity.getProperty("subscribed");
+		    	_logger.info(email + " is subscribed! Sending them a daily report.");
+		    	SendMail.send(email, "update");
+		    	
+		    }
 			
 		}
 		catch (Exception ex) {
-			//Log any exceptions in your Cron Job
+			_logger.info(ex.getMessage());
 		}
 	}
 	@Override

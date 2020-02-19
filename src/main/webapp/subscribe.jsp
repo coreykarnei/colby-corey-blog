@@ -86,6 +86,8 @@
 		    } 
 		    %>
 		    
+		    <a href="/" class="button">Cancel</a>
+		    
 	     
 	    </div>
 		
